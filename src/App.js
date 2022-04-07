@@ -9,10 +9,20 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+
 } from "react-router-dom";
 import Rightbar from "./Component/RightSidebar";
 import PageNotFound from "./Pages/ErrorPage";
 import ShowList from "./Component/ShowList/Index";
+import Friends from "./Component/Friends/index"
+import Gallery from "./Component/Gallery";
+import LogIn from "./Pages/Auth/Login";
+import SignUp from "./Pages/Auth/SignUp";
+import { useSelector, } from 'react-redux'
+
+import { ToastContainer, } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import allActions from './'
 const useStyles = makeStyles((theme) => ({
   right: {
     [theme.breakpoints.down("sm")]: {
@@ -22,32 +32,60 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const currentUser = useSelector(state => state.currentUser)
+  console.log(currentUser)
+  // const dispatch = useDispatch()
   const classes = useStyles();
+
   return (
     <div >
       <GlobalProvider>
         <Router>
-          <Navbar />
+          {
+            currentUser.loggedIn?(<Navbar />):<></>
+          }
+        
           <Grid container>
+            <ToastContainer
+              position="top-right"
+              autoClose={1000}
+            />
+
             <Grid item sm={2} xs={2}>
-              <Sidebar />
+           
+            {
+            currentUser.loggedIn?( <Sidebar />):<></>
+          }
             </Grid>
 
             <Grid item sm={7} xs={10}>
-              <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/edit/:id" element={<Edit />} />
-                <Route exact path="/record" element={<ShowList />} />
-                <Route exact path="*" element={<PageNotFound />} />
+              {currentUser.loggedIn ? <>
+                <Routes>
+                  {/* <Redirect from="/" to="/home"  exact/> */}
+                  <Route exact path="/home" element={<Home />} />
+                  <Route exact path="/edit/:id" element={<Edit />} />
+                  <Route exact path="/record" element={<ShowList />} />
+                  <Route exact path="/friend" element={<Friends />} />
+                  <Route exact path="/gallery" element={<Gallery />} />
+                  {/* <Route exact path="/" element={<LogIn />} /> */}
+                  <Route exact path="/signup" element={<SignUp />} />
+                  <Route exact path="*" element={<PageNotFound />} />
 
 
-              </Routes>
+                </Routes>
+              </> : <Routes><Route path="*" element={<LogIn />} /> </Routes>
+              }
             </Grid>
             <Grid item sm={3} className={classes.right}>
-              <Rightbar />
+            {
+            currentUser.loggedIn?( <Rightbar />):<></>
+          }
+             
             </Grid>
           </Grid>
-          <Add />
+         
+        {  currentUser.loggedIn?( <Add />):<></>}
+
         </Router>
       </GlobalProvider>
     </div>

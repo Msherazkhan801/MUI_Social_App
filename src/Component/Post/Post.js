@@ -21,7 +21,7 @@ import {
     },
   }));
   
-  const Post = ({ img, title }) => {
+  const Post = ({ img, title ,detail }) => {
     const classes = useStyles();
     return (
       <Card className={classes.card}>
@@ -32,8 +32,7 @@ import {
               {title}
             </Typography>
             <Typography variant="body2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam
-              consectetur earum est.
+           { detail}
             </Typography>
           </CardContent>
         </CardActionArea>

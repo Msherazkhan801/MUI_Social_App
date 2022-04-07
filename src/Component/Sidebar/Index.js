@@ -65,7 +65,7 @@ const Sidebar = () => {
   return (
     <Container className={classes.container}>
       {/* <Link to="/"> */}
-      <Link to="/"><div className={classes.item}>
+      <Link to="/home"><div className={classes.item} >
             <Home className={classes.icon} />
         <Typography className={classes.text}>Homepage</Typography>
       </div>
@@ -82,10 +82,12 @@ const Sidebar = () => {
         <Typography className={classes.text}>Lists</Typography>
       </div>
       </Link>
+      <Link to="/gallery" className={classes.itemlink}> 
       <div className={classes.item}>
         <PhotoCamera className={classes.icon} />
         <Typography className={classes.text}>Camera</Typography>
       </div>
+      </Link>
       <div className={classes.item}>
         <PlayCircleOutline className={classes.icon} />
         <Typography className={classes.text}>Videos</Typography>

@@ -15,7 +15,6 @@ import {
 import { globalContext } from '../../context/globalState'
 import DeleteIcon from "@material-ui/icons/Delete";
 import PencelIcon from '@material-ui/icons/Edit';
-// import Edit from "../Modal/Edit"
 import { useNavigate } from "react-router-dom";
 const useStyles = makeStyles({
   container: {
@@ -47,10 +46,10 @@ const AllUsers = () => {
   }, []);
 
   let filteredVal = users && users.length > 0 && users.filter((item, i) => {
-    console.log(item.name, 'item')
+    // console.log(item.name, 'item')
     return item && item.name && item.name.toLowerCase().includes(value1)
   })
-  console.log(filteredVal, "filteredVal")
+  // console.log(filteredVal, "filteredVal")
   const handleDelet = async (id) => {
     await Deletuser(id);
     alert("are you sure");
@@ -61,7 +60,6 @@ const AllUsers = () => {
   const navigate = useNavigate();
 
 
-  // console.log("users", users);
   const classes = useStyles();
   return (
     <Container className={classes.container}>
@@ -70,7 +68,7 @@ const AllUsers = () => {
         <Table>
           <TableHead className={classes.tablehead}>
             <TableRow>
-              <TableCell className={classes.cell}>iD</TableCell>
+              <TableCell className={classes.cell}>ID</TableCell>
               <TableCell className={classes.cell} align="center">Name</TableCell>
               <TableCell className={classes.cell} align="center">Email</TableCell>
               <TableCell className={classes.cell} align="center">Contact</TableCell>
@@ -78,7 +76,7 @@ const AllUsers = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredVal &&filteredVal.length > 0  ?  filteredVal.map((row) => (
+            {filteredVal &&  filteredVal.length > 0  ?  filteredVal.map((row) => (
               <TableRow key={row.id}>
                 <TableCell component="th" scope="row">
                   {row.id}

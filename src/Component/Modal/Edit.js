@@ -78,7 +78,7 @@ const navgate=useNavigate();
    const  LoadSingleUser=async()=>{
         const response = await getSingleUser(id);
         setUsers(response.data);
-        console.log(response,"data")
+        // console.log(response,"data")
       };
    
    
